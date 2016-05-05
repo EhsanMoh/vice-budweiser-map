@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>CSV Lat/Lng Processor</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyyrXfb_CrwTMD8LSXouABLu5UMeQYkLw&amp;libraries=places"></script>
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js">
+    </script>
+    <script src="assets/papaparse.min.js"></script>
+    <script src="assets/processor.js"></script>
+  </head>
+  <body>
+    <h1>CSV Address Processor &amp; Coordinates Generator</h1>
+    <p>This will take your existing CSV export and add the Latitude &amp; Longitude coordinates based off the address.</p>
+    <p>For now the processor assumes the address of the location is in the SECOND COLUMN position, and the FIRST ROW is ignored as it is typically a header</p>
+    <p>For example:</p>
+    <div style="background:#eee; padding:10px; display:inline-block;">
+    <code>
+POC Name ,Address ,Postal Code<br>
+LA BICHE INN,"10022 101 AVE, LAC LA BICHE, ALBERTA, T0A 2C0",T0A 2C0<br>
+BOSTON PIZZA,"5009 42 ST, ST PAUL, ALBERTA, T0A 3A2",T0A 3A2<br>
+BOSTON PIZZA,"14068 STANLEY DR, LAC LA BICHE, ALBERTA, T0A2C0",T0A2C0<br>
+BOSTON PIZZA,"6711 50 AVE, STETTLER, ALBERTA, T0C 2L2",T0C 2L2<br>
+...
+    </code>
+    </div>
+    <p>Will output:</p>
+    <div style="background:#eee; padding:10px; display:inline-block;">
+    <code>
+"POC Name ","Address ",Postal Code,Latitude,Longitude<br>
+LA BICHE INN,"10022 101 AVE, LAC LA BICHE, ALBERTA, T0A 2C0",T0A 2C0,54.7710502,-111.97468400000002<br>
+BOSTON PIZZA,"5009 42 ST, ST PAUL, ALBERTA, T0A 3A2",T0A 3A2,53.9931373,-111.273009<br>
+BOSTON PIZZA,"14068 STANLEY DR, LAC LA BICHE, ALBERTA, T0A2C0",T0A2C0,54.76239340000001,-112.0119077<br>
+BOSTON PIZZA,"6711 50 AVE, STETTLER, ALBERTA, T0C 2L2",T0C 2L2,52.3244954,-112.73620920000002<br>
+...
+    </code>
+    </div>
+
+    <h2 id="processing" style="display:none;">Processed <span id="cursor">0</span> of <span id="total">unknown</span></h2>
+    <h4 id="throttle"></h4>
+    <ul id="error" style="color:red"></ul>
+    <textarea id="input" style="width:100%;max-width:800px;height: 400px" placeholder="Paste your CSV here..."></textarea><br>
+    <button type="button" id="go" style="padding: 10px;font-size:1.2em">Begin Processing</button><br>
+    <textarea id="output" style="width:100%;max-width:800px;height: 400px" placeholder="Generated output will go here..." onfocus="this.select();" onmouseup="return false;" readonly="true"></textarea>
+  </body>
+</html>

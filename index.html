@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Bud &amp; Burger Finder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyyrXfb_CrwTMD8LSXouABLu5UMeQYkLw&amp;libraries=places"></script>
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js">
+    </script>
+    <script src="assets/papaparse.min.js"></script>
+    <script src="assets/store-locator.min.js"></script>
+    <script src="assets/budweiser-static-ds.js"></script>
+    <script src="assets/panel.js"></script>
+    <link rel="stylesheet" href="assets/storelocator.css">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        font-family: sans-serif;
+        min-height: 100%;
+      }
+      #map-canvas {
+        width: 100%;
+        height: auto;
+        position: absolute;
+        top: 60px;
+        bottom: 0;
+      }
+      #panel {
+        height: auto;
+        position: absolute;
+        top: 60px;
+        bottom: 0;
+        width: 300px;
+        float: left;
+        margin-right: 10px;
+      }
+      #header {
+        height: 60px;
+        /*line-height: 60px;*/
+        padding: 0 20px;
+        padding-top: 15px;
+        background: #db4437;
+        color: white;
+      }
+      #toggle {
+        cursor: pointer;
+        font-size: 10px;
+      }
+      #panel .feature-filter label { width: 130px; }
+    </style>
+    <script type="text/javascript">
+      $( document ).ready(function() {
+        $('#toggle').on('click', function() {
+          var me = $(this);
+          var sidebar = $('#panel');
+          if (me.text() === 'Hide Sidebar') {
+            sidebar.animate({left:'-300px'}, 300);
+            // sidebar.css('left', '-300px');
+            me.text('Show Sidebar');
+          } else {
+            sidebar.animate({left:'0'}, 300);
+            // sidebar.css('left', '0');
+            me.text('Hide Sidebar');
+          }
+        })
+      });
+    </script>
+  </head>
+  <body>
+    <div id="header">
+      Bud &amp; Burger Finder
+      <div id="toggle">Hide Sidebar</div>
+    </div>
+    <div id="map-canvas"></div>
+    <div id="panel"></div>
+  </body>
+</html>
