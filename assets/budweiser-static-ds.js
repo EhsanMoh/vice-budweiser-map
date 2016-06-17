@@ -48,6 +48,10 @@ BudDataSource.prototype.parse_ = function(csv) {
 
   // Ignores the 0th entry in row, since that's the header
   for (var i = 1, row; row = rows[i]; i++) {
+    if(row.length == 1 && row[0].trim() == '') {
+      // This row contains nothing but spaces. ignore it
+      continue;
+    }
     var namedRow = this.toObject_(headings, row);
     var features = new storeLocator.FeatureSet;
     // features.add(this.FEATURES_.getById('Wheelchair-' + row.Wheelchair));
